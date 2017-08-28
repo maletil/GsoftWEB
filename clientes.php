@@ -55,7 +55,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
                 <td><strong><?php echo $object->{'Poblacion'} ?></strong></td>
                 <td><strong><?php echo $object->{'Domicilio'} ?></strong></td>
                 <td><strong><?php if($object->{'Telefono1'} != "") {echo $object->{'Telefono1'};} ?></strong></td>
-                <td><strong><?php if($object->{'Telefono2'} != "") {echo $object->{'Telefono2'};} ?></strong></td> <td><strong>
+                <td><strong><?php if($object->{'Telefono2'} != "") {echo $object->{'Telefono2'};} ?></strong></td>
             </tr>
 
         <?php endforeach;
