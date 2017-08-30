@@ -22,7 +22,7 @@ if (isset($_GET["auth"])) {
 //var_dump($data);
     echo "<table cellspacing=\"0\">
            <tr class='banner'>
-                <td><strong>Codigo</strong></td>
+                <td><strong>Código</strong></td>
                 <td><strong>Nombre</strong></td>
             </tr>";
 

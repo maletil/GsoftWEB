@@ -34,7 +34,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
 //var_dump($data);
     echo "<table cellspacing=\"0\">
            <tr class='banner'>
-                <td><strong>Codigo</strong></td>
+                <td><strong>Código</strong></td>
                 <td><strong>Nombre Fiscal</strong></td>
                 <td><strong>CIF</strong></td>
                 <td><strong>C. Postal</strong></td>
