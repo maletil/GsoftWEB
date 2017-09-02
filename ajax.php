@@ -4,7 +4,11 @@
  * User: maletil
  * Date: 30/08/17
  * Time: 22:16
- */?>
+ */
+
+if (isset($_GET["auth"])){
+    $auth = $_GET["auth"];
+?>
 
 <html>
 <head>
@@ -25,23 +29,43 @@
                 if (this.readyState==4 && this.status==200) {
                     document.getElementById("livesearch").innerHTML=this.responseText;
                 }
-            }
+            };
 
-            <?php if (isset($_GET["mode"])){
+            <?php $mode = 0; $orderBy = "Familia";
+            if (isset($_GET["mode"])){
                 $mode = $_GET["mode"];
             }
             if ($mode == 1){
                 $url = "http://localhost/GsoftWEB/clientes.php?auth=1&search=";
             }else {
-                $url = "http://localhost/GsoftWEB/articulos.php?auth=1&orderBy=Fecha&getPrice=false&search="; } ?>
-xmlhttp.open("GET","<?php echo $url;?>"+str,true);
-xmlhttp.send();
-console.log(xmlhttp);
-}
+                $url = "http://localhost/GsoftWEB/articulos.php?auth=". $auth ."&orderBy=". $orderBy ."&getPrice=false&search="; } ?>
+            xmlhttp.open("GET","<?php echo $url;?>"+str,true);
+            xmlhttp.send();
+            console.log(xmlhttp);
+        }
 </script>
 </head>
 <body>
+    <form>
+        <input type="radio" id="nombre" name="order" value="nombre" checked>
+        <label for="nombre">Nombre</label>
+        <input type="radio" id="familia" name="order" value="familia">
+        <label for="familia">Familia</label>
+        <input type="radio" id="fecha" name="order" value="fecha">
+        <label for="fecha">Fecha</label>
+    </form>
+    <script>
 
+
+        var x = document.getElementById("nombre").value;
+        if (x = "nombre"){
+            console.log("nombre");
+        } else {
+            console.log("no es nombre");
+        }
+    
+
+</script>
 <form>
 <label>
 <input type="text" size="30" onkeyup="showResult(this.value)">
@@ -50,3 +74,4 @@ console.log(xmlhttp);
     </form>
     </body>
     </html>
+<?php } ?>
