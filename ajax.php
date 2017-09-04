@@ -8,15 +8,27 @@
 
 if (isset($_GET["auth"])){
     $auth = $_GET["auth"];
+    $mode = 0;
+if (isset($_GET["mode"])){
+    $mode = $_GET["mode"];
+}
+if ($mode == 1){
+    $url = "http://localhost/GsoftWEB/clientes.php?auth=1&search=";
+}else {
+    $url = "http://localhost/GsoftWEB/articulos.php?auth=". $auth ."&getPrice=false&search=";
+}
 ?>
 
 <html>
 <head>
     <script>
-        var order = "";
+        var order = "Nombre";
+        var search = "";
+
+
         function orderby(str) {
-            console.log(str);
             order = str;
+            makerequest();
         }
         function showResult(str) {
             if (str.length==0 | str.length==1) {
@@ -35,17 +47,14 @@ if (isset($_GET["auth"])){
                     document.getElementById("livesearch").innerHTML=this.responseText;
                 }
             };
-
-            <?php $mode = 0;
-            if (isset($_GET["mode"])){
-                $mode = $_GET["mode"];
-            }
-            if ($mode == 1){
-                $url = "http://localhost/GsoftWEB/clientes.php?auth=1&search=";
-            }else {
-                $url = "http://localhost/GsoftWEB/articulos.php?auth=". $auth ."&getPrice=false&search="; } ?>
+            search = str;
+            makerequest();
+        }
+        function makerequest() {
             console.log(order);
-            xmlhttp.open("GET","<?php echo $url;?>"+ str + "&orderBy=" + order,true);
+            console.log(search);
+            var petition = "<?php echo $url;?>"+ search + "&orderBy=" + order;
+            xmlhttp.open("GET",petition,true);
             xmlhttp.send();
             console.log(xmlhttp);
         }
@@ -62,7 +71,7 @@ if (isset($_GET["auth"])){
     </form>
 <form>
 <label>
-<input type="text" size="30" onkeyup="showResult(this.value)">
+<input type="text" size="30" onkeyup="showResult(this.value);">
     </label>
     <div id="livesearch"></div>
     </form>
