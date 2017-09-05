@@ -12,6 +12,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     $search = rawurlencode($_GET["search"]);
     $auth = $_GET["auth"];
     $getPrice = "false";
+    $showZeroValue = true;
 
     if (isset($_GET["getPrice"])) {
         $getPrice = $_GET["getPrice"];
@@ -52,9 +53,9 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
                 <td><strong><?php echo $object->{'Descripcion'} ?></strong></td>
                 <td><strong><?php echo substr($object->{'Codigo'}, 0, 2) ?></strong></td>
                 <?php if($getPrice == 'true') {echo "<td><strong>";
-                    if($object->{'Precio Medio'} != 0) {echo substr($object->{'Precio Medio'}, 0, 6) . "€";} else {echo '0'; }
+                    if($object->{'Precio Medio'} != 0) {echo substr($object->{'Precio Medio'}, 0, 6) . "€";} else {if ($showZeroValue){ echo '0'; }}
                     echo "</strong></td> <td><strong>";
-                    if($object->{'Ultimo Precio'} != 0) {echo substr($object->{'Ultimo Precio'}, 0, 6) . "€"; } else {echo '0'; }
+                    if($object->{'Ultimo Precio'} != 0) {echo substr($object->{'Ultimo Precio'}, 0, 6) . "€"; } else {if ($showZeroValue){ echo '0'; }}
                     echo "</strong></td>"; }?>
                 <td><strong><?php echo substr($object->{'Ultima Modificacion'}, 0, 10) ?></strong></td>
             </tr>
