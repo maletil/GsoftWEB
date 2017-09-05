@@ -15,17 +15,22 @@ if (isset($_GET["mode"])){
 if ($mode == 1){
     $url = "http://localhost/GsoftWEB/clientes.php?auth=1&search=";
 }else {
-    $url = "http://localhost/GsoftWEB/articulos.php?auth=". $auth ."&getPrice=false&search=";
+    $url = "http://localhost/GsoftWEB/articulos.php?auth=". $auth ."&search=";
 }
 ?>
 
 <html>
 <head>
     <script>
+        var price = true;
         var order = "Nombre";
         var search = "";
 
+        function priceBox(str) {
 
+            price = getPrice.checked;
+            makerequest();
+        }
         function orderby(str) {
             order = str;
             makerequest();
@@ -53,7 +58,11 @@ if ($mode == 1){
         function makerequest() {
             console.log(order);
             console.log(search);
-            var petition = "<?php echo $url;?>"+ search + "&orderBy=" + order;
+            console.log(price);
+            if (price) {
+                var pricequery = "&getPrice=" + price;
+            }
+            var petition = "<?php echo $url;?>"+ search + "&orderBy=" + order + pricequery;
             xmlhttp.open("GET",petition,true);
             xmlhttp.send();
             console.log(xmlhttp);
@@ -62,17 +71,20 @@ if ($mode == 1){
 </head>
 <body>
     <form>
-        <input type="radio" id="nombre" name="order" value="Nombre" onclick="orderby(this.value);"  checked>
+        <input type="radio" id="nombre" name="order" value="Nombre" onclick="orderby(this.value);" checked>
         <label for="nombre">Nombre</label>
         <input type="radio" id="familia" name="order" value="Familia" onclick="orderby(this.value);">
         <label for="familia">Familia</label>
         <input type="radio" id="fecha" name="order" value="Fecha" onclick="orderby(this.value);">
         <label for="fecha">Fecha</label>
+        <input id="getPrice" type="checkbox" value="true" style="margin-left:35px;" checked onclick="priceBox(this.value)">
+        <label for="getPrice">Precios</label>
     </form>
 <form>
 <label>
 <input type="text" size="30" onkeyup="showResult(this.value);">
     </label>
+    <br>
     <div id="livesearch"></div>
     </form>
     </body>
