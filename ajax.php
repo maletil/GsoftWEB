@@ -12,6 +12,9 @@ if (isset($_GET["auth"])){
 if (isset($_GET["mode"])){
     $mode = $_GET["mode"];
 }
+/*if (isset($_GET["orderWord"])) {
+    $orderWord =
+}*/
 if ($mode == 1){
     $url = "http://localhost/GsoftWEB/clientes.php?auth=1&search=";
 }else {
@@ -25,6 +28,7 @@ if ($mode == 1){
         var price = true;
         var order = "Nombre";
         var search = "";
+        var pricequery = "";
 
         function priceBox(str) {
 
@@ -36,7 +40,7 @@ if ($mode == 1){
             makerequest();
         }
         function showResult(str) {
-            if (str.length==0 | str.length==1) {
+            if (str.length === 0 || str.length === 1) {
                 document.getElementById("livesearch").innerHTML="";
                 document.getElementById("livesearch").style.border="0px";
                 return;
@@ -48,7 +52,7 @@ if ($mode == 1){
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }
             xmlhttp.onreadystatechange=function() {
-                if (this.readyState==4 && this.status==200) {
+                if (this.readyState === 4 && this.status === 200) {
                     document.getElementById("livesearch").innerHTML=this.responseText;
                 }
             };
@@ -77,12 +81,12 @@ if ($mode == 1){
         <label for="familia">Familia</label>
         <input type="radio" id="fecha" name="order" value="Fecha" onclick="orderby(this.value);">
         <label for="fecha">Fecha</label>
-        <input id="getPrice" type="checkbox" value="true" style="margin-left:35px;" checked onclick="priceBox(this.value)">
+        <input id="getPrice" type="checkbox" value="true" style="margin-left:35px;" checked onclick="priceBox(this.value)" checked>
         <label for="getPrice">Precios</label>
     </form>
 <form>
 <label>
-<input type="text" size="30" onkeyup="showResult(this.value);">
+<input id="box" type="text" size="30" onkeyup="showResult(this.value);">
     </label>
     <br>
     <div id="livesearch"></div>
