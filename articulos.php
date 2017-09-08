@@ -9,13 +9,14 @@
 if (isset($_GET["auth"]) && isset($_GET["search"])) {
 
     $orderBy = "";
+    $orderWord = "";
     $search = rawurlencode($_GET["search"]);
     $auth = $_GET["auth"];
     $getPrice = "false";
     //Config
     $showZeroValue = true;
-    $roundPrices = false;
-    $roundPrecision = 2;
+    $roundPrices = true;
+    $roundPrecision = 3;
 
     if (isset($_GET["getPrice"])) {
         $getPrice = $_GET["getPrice"];
@@ -23,9 +24,12 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     if (isset($_GET["orderBy"])) {
         $orderBy = $_GET["orderBy"];
     }
+    if (isset($_GET["orderWord"])) {
+        $orderWord = "&orderWord= " . $_GET["orderWord"];
+    }
 
 
-    $apiRequest = "http://localhost/GsoftAPI-A/methods/get/articulos.php?auth=". $auth ."&search=". $search ."&getPrice=". $getPrice ."&orderBy=". $orderBy;
+    $apiRequest = "http://localhost/GsoftAPI-A/methods/get/articulos.php?auth=". $auth ."&search=". $search ."&getPrice=". $getPrice ."&orderBy=". $orderBy . $orderWord;
     $json_string = file_get_contents($apiRequest);
 
     if (isset($json_string)) {

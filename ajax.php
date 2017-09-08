@@ -12,11 +12,8 @@ if (isset($_GET["auth"])){
 if (isset($_GET["mode"])){
     $mode = $_GET["mode"];
 }
-/*if (isset($_GET["orderWord"])) {
-    $orderWord =
-}*/
 if ($mode == 1){
-    $url = "http://localhost/GsoftWEB/clientes.php?auth=1&search=";
+    $url = "http://localhost/GsoftWEB/clientes.php?auth=". $auth ."&search=";
 }else {
     $url = "http://localhost/GsoftWEB/articulos.php?auth=". $auth ."&search=";
 }
@@ -81,7 +78,7 @@ if ($mode == 1){
         <label for="familia">Familia</label>
         <input type="radio" id="fecha" name="order" value="Fecha" onclick="orderby(this.value);">
         <label for="fecha">Fecha</label>
-        <input id="getPrice" type="checkbox" value="true" style="margin-left:35px;" checked onclick="priceBox(this.value)" checked>
+        <input id="getPrice" type="checkbox" value="true" style="margin-left:35px;" onclick="priceBox(this.value)" checked>
         <label for="getPrice">Precios</label>
     </form>
 <form>
