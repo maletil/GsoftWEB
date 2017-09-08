@@ -25,7 +25,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
         $orderBy = $_GET["orderBy"];
     }
     if (isset($_GET["orderWord"])) {
-        $orderWord = "&orderWord= " . $_GET["orderWord"];
+        $orderWord = "&orderWord=" . $_GET["orderWord"];
     }
 
 
