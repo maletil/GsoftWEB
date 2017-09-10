@@ -25,7 +25,6 @@ if ($mode == 1){
         var price = true;
         var order = "Nombre";
         var search = "";
-        var pricequery = "";
 
         function priceBox(str) {
 
@@ -60,10 +59,7 @@ if ($mode == 1){
             console.log(order);
             console.log(search);
             console.log(price);
-            if (price) {
-                var pricequery = "&getPrice=" + price;
-            }
-            var petition = "<?php echo $url;?>"+ search + "&orderBy=" + order + pricequery;
+            var petition = "<?php echo $url;?>"+ search + "&orderBy=" + order + "&getPrice=" + price;
             xmlhttp.open("GET",petition,true);
             xmlhttp.send();
             console.log(xmlhttp);
