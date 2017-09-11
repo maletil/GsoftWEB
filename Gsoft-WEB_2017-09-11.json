@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2017-09-11T10:56:20.766Z",
+	"__export_date": "2017-09-11T17:35:01.057Z",
 	"__export_source": "insomnia.desktop.app:v5.7.14",
 	"resources": [
 		{
@@ -63,9 +63,9 @@
 		{
 			"_id": "req_18c9f921356946bc9207491733ea8d5f",
 			"parentId": "fld_5853e4d0e219410e833f83d69628a419",
-			"modified": 1505126966506,
+			"modified": 1505151293105,
 			"created": 1505126577360,
-			"url": "{{ base_url  }}articulos.php",
+			"url": "{{ base_url  }}/articulos.php",
 			"name": "Articulos",
 			"description": "",
 			"method": "GET",
