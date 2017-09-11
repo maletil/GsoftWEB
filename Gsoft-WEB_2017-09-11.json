@@ -1,0 +1,188 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2017-09-11T10:56:20.766Z",
+	"__export_source": "insomnia.desktop.app:v5.7.14",
+	"resources": [
+		{
+			"_id": "wrk_7659ff29804c4e1b90e53dc122691f19",
+			"parentId": null,
+			"modified": 1505126408454,
+			"created": 1505126408454,
+			"name": "Gsoft WEB",
+			"description": "",
+			"certificates": [],
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_f5eed500d00c4c5e9c234c5312726711",
+			"parentId": "wrk_7659ff29804c4e1b90e53dc122691f19",
+			"modified": 1505126457309,
+			"created": 1505126441799,
+			"name": "Base Environment",
+			"data": {
+				"base_web_url": "localhost/GsoftWEB"
+			},
+			"color": null,
+			"isPrivate": false,
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_83461bda4e9047ee9877266853ed501f",
+			"parentId": "wrk_7659ff29804c4e1b90e53dc122691f19",
+			"modified": 1505126662069,
+			"created": 1505126662069,
+			"name": "Default Jar",
+			"cookies": [],
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_5853e4d0e219410e833f83d69628a419",
+			"parentId": "wrk_7659ff29804c4e1b90e53dc122691f19",
+			"modified": 1505126914179,
+			"created": 1505126546889,
+			"name": "tables",
+			"description": "",
+			"environment": {
+				"base_url": "{{ base_web_url  }}/tables"
+			},
+			"metaSortKey": -1505126908815,
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_2c5793ec4b0649ef9eb84cc1c46e2219",
+			"parentId": "wrk_7659ff29804c4e1b90e53dc122691f19",
+			"modified": 1505126908765,
+			"created": 1505126908765,
+			"name": "AJAX",
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1505126908765,
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_18c9f921356946bc9207491733ea8d5f",
+			"parentId": "fld_5853e4d0e219410e833f83d69628a419",
+			"modified": 1505126966506,
+			"created": 1505126577360,
+			"url": "{{ base_url  }}articulos.php",
+			"name": "Articulos",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [
+				{
+					"name": "auth",
+					"value": "123",
+					"id": "pair_27e651ffffe44cf3ac39aa3fd84198d6"
+				},
+				{
+					"name": "search",
+					"value": "",
+					"id": "pair_9bc4f09479ee44e3af7d1f437b1841f2"
+				},
+				{
+					"name": "orderBy",
+					"value": "Familia",
+					"id": "pair_4958f523de4c4923b764860c18f601d2"
+				},
+				{
+					"name": "getPrice",
+					"value": "true",
+					"id": "pair_3ae0888f85a746da9c245d46f5315fb9"
+				}
+			],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1505126577360,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_faa73c175d194c9b98967bb3fbf826b4",
+			"parentId": "fld_5853e4d0e219410e833f83d69628a419",
+			"modified": 1505126970907,
+			"created": 1505126730697,
+			"url": "{{ base_url  }}/clientes.php",
+			"name": "Clientes",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [
+				{
+					"name": "auth",
+					"value": "123",
+					"id": "pair_5dbc123a98544fc183178a97df3f083b"
+				},
+				{
+					"name": "search",
+					"value": "",
+					"id": "pair_bcab5c1e1d4749ae8fea3a8ea7004c11"
+				}
+			],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1505126577310,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_26223b2e83a24c438e82a2839b43a4a6",
+			"parentId": "fld_5853e4d0e219410e833f83d69628a419",
+			"modified": 1505126897457,
+			"created": 1505126840595,
+			"url": "{{ base_url  }}/familias.php",
+			"name": "Familias",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [
+				{
+					"name": "auth",
+					"value": "123",
+					"id": "pair_142060422660469a938f4bad47ba01f0"
+				}
+			],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1505126577260,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_37b045225a9448c593d6405fd74a3e70",
+			"parentId": "fld_2c5793ec4b0649ef9eb84cc1c46e2219",
+			"modified": 1505126956817,
+			"created": 1505126922045,
+			"url": "{{ base_web_url  }}/ajax.php",
+			"name": "Articulos",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [
+				{
+					"name": "auth",
+					"value": "123",
+					"id": "pair_50aa34bda57245c898e5a7628b6b8fe5"
+				}
+			],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1505126922045,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		}
+	]
+}
