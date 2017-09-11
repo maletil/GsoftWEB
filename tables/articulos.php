@@ -40,7 +40,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     }
 
 //var_dump($data);
-    echo "<table cellspacing=\"0\">
+    echo "<link rel=\"stylesheet\" href=\"http://localhost/GsoftWEB/css/tables.css\" type=\"text/css\"><table cellspacing=\"0\">
            <tr class='banner'>
                 <td><strong>Código</strong></td>
                 <td><strong>Nombre</strong></td>
@@ -94,31 +94,3 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     } else {echo "</table>"; echo ('No encontrado');}
 }
 ?>
-
-<style>
-    td{
-        padding-right:10px;
-        padding-left: 13px;
-        padding-top: 4px;
-        font-family: Liberation Sans, Arial, monospace;
-        font-size: 1rem;
-        box-shadow: 1px 0 0 0 #406c52 inset;
-    }
-    .banner td {
-        padding-top: 14px;
-        padding-bottom: 12px;
-        box-shadow: 1px 0 0 0 #35694a inset;
-    }
-    .banner{
-        background-color: #0d9351;
-        color: #f8f8f8;
-    }
-    .content {
-        background-color: #c5d8c6b3;
-        font-weight: 300;
-        line-height: 1.5;
-    }
-    .content:nth-child(2n){
-        background-color: #FFF;
-    }
-</style>

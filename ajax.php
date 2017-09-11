@@ -13,9 +13,9 @@ if (isset($_GET["mode"])){
     $mode = $_GET["mode"];
 }
 if ($mode == 1){
-    $url = "http://localhost/GsoftWEB/clientes.php?auth=". $auth ."&search=";
+    $url = "http://localhost/GsoftWEB/tables/clientes.php?auth=". $auth ."&search=";
 }else {
-    $url = "http://localhost/GsoftWEB/articulos.php?auth=". $auth ."&search=";
+    $url = "http://localhost/GsoftWEB/tables/articulos.php?auth=". $auth ."&search=";
 }
 ?>
 
