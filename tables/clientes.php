@@ -20,6 +20,12 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
             $orderBy = $_GET["orderBy"];
     }
 
+    function phoneNumber($number) {
+        if ($number != "") {
+            echo "<a target=\"_blank\" href=\"tel:" . $number . "\">" . $number . "</a>";
+        }
+    }
+
 
     $apiRequest = "http://localhost/GsoftAPI-A/methods/get/clientes.php?auth=". $auth ."&search=". $search ."&orderBy=". $orderBy;
     $json_string = file_get_contents($apiRequest);
@@ -54,8 +60,8 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
                 <td><strong><?php echo $object->{'C Postal'} ?></strong></td>
                 <td><strong><?php echo $object->{'Poblacion'} ?></strong></td>
                 <td><strong><?php echo $object->{'Domicilio'} ?></strong></td>
-                <td><strong><?php if($object->{'Telefono1'} != "") {echo $object->{'Telefono1'};} ?></strong></td>
-                <td><strong><?php if($object->{'Telefono2'} != "") {echo $object->{'Telefono2'};} ?></strong></td>
+                <td><strong><?php phoneNumber($object->{'Telefono1'}); ?></strong></td>
+                <td><strong><?php phoneNumber($object->{'Telefono2'}) ?></strong></td>
             </tr>
 
         <?php endforeach;
