@@ -8,17 +8,10 @@
 
 if (isset($_GET["auth"]) && isset($_GET["search"])) {
 
-    $orderBy = "";
     $search = rawurlencode($_GET["search"]);
     $auth = $_GET["auth"];
     $getPrice = "false";
 
-    if (isset($_GET["getPrice"])) {
-            $getPrice = $_GET["getPrice"];
-    }
-    if (isset($_GET["orderBy"])) {
-            $orderBy = $_GET["orderBy"];
-    }
 
     function phoneNumber($number) {
         if ($number != "") {
@@ -27,7 +20,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     }
 
 
-    $apiRequest = "http://localhost/GsoftAPI-A/methods/get/clientes.php?auth=". $auth ."&search=". $search ."&orderBy=". $orderBy;
+    $apiRequest = "http://localhost/GsoftAPI-A/methods/get/clientes.php?auth=". $auth ."&search=". $search;
     $json_string = file_get_contents($apiRequest);
 
     if (isset($json_string)) {

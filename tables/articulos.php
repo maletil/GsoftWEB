@@ -8,7 +8,6 @@
 
 if (isset($_GET["auth"]) && isset($_GET["search"])) {
 
-    $orderBy = "";
     $orderWord = "";
     $search = rawurlencode($_GET["search"]);
     $auth = $_GET["auth"];
@@ -28,9 +27,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
             $showPrices = false;
         }
     }
-    if (isset($_GET["orderBy"])) {
-        $orderBy = $_GET["orderBy"];
-    }
+    $orderBy = (isset($_GET["orderBy"]) ? $_GET["orderBy"] : '');
     if (isset($_GET["orderWord"])) {
         $orderWord = "&orderWord=" . $_GET["orderWord"];
     }
