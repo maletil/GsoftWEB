@@ -28,6 +28,26 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
         $orderWord = "&orderWord=" . $_GET["orderWord"];
     }
 
+    function returnPrice($price) {
+        global $getPrice;
+        global $roundPrices;
+        global $roundPrecision;
+        global $showZeroValue;
+        if ($getPrice == 'true') {
+            echo "<td><strong>";
+            if ($price != 0) {
+                if ($roundPrices) {
+                    echo round(substr($price, 0, 6), $roundPrecision) . "€";
+                } else {
+                    echo substr($price, 0, 6) . "€";
+                }
+            } else {
+                if ($showZeroValue) {
+                    echo '0';
+                }
+            }
+        }
+    }
 
     $apiRequest = "http://localhost/GsoftAPI-A/methods/get/articulos.php?auth=". $auth ."&search=". $search ."&getPrice=". $getPrice ."&orderBy=". $orderBy . $orderWord;
     $json_string = file_get_contents($apiRequest);
@@ -59,33 +79,8 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
                 <td><strong><?php echo $object->{'Codigo'} ?></strong></td>
                 <td><strong><?php echo $object->{'Descripcion'} ?></strong></td>
                 <td><strong><?php echo substr($object->{'Codigo'}, 0, 2) ?></strong></td>
-
-                <?php if($getPrice == 'true') {echo "<td><strong>";
-                    if($object->{'Precio Medio'} != 0) {
-                        if ($roundPrices) {
-                            echo round(substr($object->{'Precio Medio'}, 0, 6), $roundPrecision) . "€";
-                        } else {
-                            echo substr($object->{'Precio Medio'}, 0, 6) . "€";
-                        }
-                    }else {
-                        if ($showZeroValue) {
-                            echo '0';
-                        }
-                    }
-                    echo "</strong></td> <td><strong>";
-
-                    if($object->{'Ultimo Precio'} != 0) {
-                        if ($roundPrices) {
-                            echo round(substr($object->{'Ultimo Precio'}, 0, 6), $roundPrecision) . "€";
-                        } else {
-                            echo substr($object->{'Ultimo Precio'}, 0, 6) . "€";
-                        }
-                    } else {
-                        if ($showZeroValue) {
-                            echo '0';
-                        }
-                    }
-                    echo "</strong></td>"; }?>
+                <?php if ($getPrice == "true"){returnPrice($object->{'Precio Medio'});}
+                if ($getPrice == "true") {returnPrice($object->{'Ultimo Precio'});} ?>
                 <td><strong><?php echo substr($object->{'Ultima Modificacion'}, 0, 10) ?></strong></td>
             </tr>
 
