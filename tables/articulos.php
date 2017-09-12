@@ -12,14 +12,21 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     $orderWord = "";
     $search = rawurlencode($_GET["search"]);
     $auth = $_GET["auth"];
-    $getPrice = "false";
+    $getPrice = false;
+    $showPrices = false;
     //Config
     $showZeroValue = true;
     $roundPrices = true;
     $roundPrecision = 3;
+    $debug = false;
 
     if (isset($_GET["getPrice"])) {
         $getPrice = $_GET["getPrice"];
+        if ($_GET["getPrice"] == "true"){
+             $showPrices= true;
+        } else {
+            $showPrices = false;
+        }
     }
     if (isset($_GET["orderBy"])) {
         $orderBy = $_GET["orderBy"];
@@ -29,28 +36,25 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     }
 
     function returnPrice($price) {
-        global $getPrice;
+        global $showPrices;
         global $roundPrices;
         global $roundPrecision;
         global $showZeroValue;
-        if ($getPrice == 'true') {
+        if ($showPrices == 'true') {
             echo "<td><strong>";
             if ($price != 0) {
-                if ($roundPrices) {
-                    echo round(substr($price, 0, 6), $roundPrecision) . "€";
-                } else {
-                    echo substr($price, 0, 6) . "€";
-                }
+                if ($roundPrices) { echo round(substr($price, 0, 6), $roundPrecision) . "€";
+                } else { echo substr($price, 0, 6) . "€";}
             } else {
-                if ($showZeroValue) {
-                    echo '0';
-                }
+                if ($showZeroValue) { echo '0';}
             }
         }
     }
 
     $apiRequest = "http://localhost/GsoftAPI-A/methods/get/articulos.php?auth=". $auth ."&search=". $search ."&getPrice=". $getPrice ."&orderBy=". $orderBy . $orderWord;
     $json_string = file_get_contents($apiRequest);
+
+    if ($debug){echo $apiRequest;}
 
     if (isset($json_string)) {
         $json_output = json_decode($json_string);
@@ -65,7 +69,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
                 <td><strong>Código</strong></td>
                 <td><strong>Nombre</strong></td>
                 <td><strong>Familia</strong></td>";
-                if ($getPrice == 'true'){
+                if ($showPrices){
            echo "<td><strong>P. Medio</strong></td>
                 <td><strong>P. Últ.</strong></td>";
                 }
@@ -79,13 +83,14 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
                 <td><strong><?php echo $object->{'Codigo'} ?></strong></td>
                 <td><strong><?php echo $object->{'Descripcion'} ?></strong></td>
                 <td><strong><?php echo substr($object->{'Codigo'}, 0, 2) ?></strong></td>
-                <?php if ($getPrice == "true"){returnPrice($object->{'Precio Medio'});}
-                if ($getPrice == "true") {returnPrice($object->{'Ultimo Precio'});} ?>
+                <?php if ($showPrices){returnPrice($object->{'Precio Medio'});}
+                if ($showPrices) {returnPrice($object->{'Ultimo Precio'});} ?>
                 <td><strong><?php echo substr($object->{'Ultima Modificacion'}, 0, 10) ?></strong></td>
             </tr>
 
         <?php endforeach;
         echo "</table>";
-    } else {echo "</table>"; echo ('No encontrado');}
+    } else {echo "</table>"; echo ('No encontrado');
+    }
 }
 ?>
