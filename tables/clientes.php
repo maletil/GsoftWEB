@@ -7,7 +7,8 @@
  */
 
 if (isset($_GET["auth"]) && isset($_GET["search"])) {
-
+    $config = include ('../private/config.php');
+    $contador = 0;
     $search = rawurlencode($_GET["search"]);
     $auth = $_GET["auth"];
     $getPrice = "false";
@@ -20,7 +21,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     }
 
 
-    $apiRequest = "http://localhost/GsoftAPI-A/methods/get/clientes.php?auth=". $auth ."&search=". $search;
+    $apiRequest = $config['apihost']."methods/get/clientes.php?auth=". $auth ."&search=". $search;
     $json_string = file_get_contents($apiRequest);
 
     if (isset($json_string)) {
@@ -31,7 +32,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     }
 
 //var_dump($data);
-    echo "<link rel=\"stylesheet\" href=\"http://localhost/GsoftWEB/css/tables.css\" type=\"text/css\"><table cellspacing=\"0\">
+    echo "<link rel=\"stylesheet\" href=\"".$config['webhost']."/css/tables.css\" type=\"text/css\"><table cellspacing=\"0\">
            <tr class='banner'>
                 <td><strong>Código</strong></td>
                 <td><strong>Nombre Fiscal</strong></td>
@@ -54,11 +55,11 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
                 <td><strong><?php echo $object->{'Poblacion'} ?></strong></td>
                 <td><strong><?php echo $object->{'Domicilio'} ?></strong></td>
                 <td><strong><?php phoneNumber($object->{'Telefono1'}); ?></strong></td>
-                <td><strong><?php phoneNumber($object->{'Telefono2'}) ?></strong></td>
+                <td><strong><?php phoneNumber($object->{'Telefono2'}); $contador++; ?></strong></td>
             </tr>
 
         <?php endforeach;
-        echo "</table>";
+        echo "</table>". $contador ." resultados.";
     } else {echo "</table>"; echo ('No encontrado');}
 }
 ?>

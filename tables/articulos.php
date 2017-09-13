@@ -7,6 +7,7 @@
  */
 
 if (isset($_GET["auth"]) && isset($_GET["search"])) {
+    $config = include ('../private/config.php');
 
     $orderWord = "";
     $search = rawurlencode($_GET["search"]);
@@ -48,7 +49,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
         }
     }
 
-    $apiRequest = "http://localhost/GsoftAPI-A/methods/get/articulos.php?auth=". $auth ."&search=". $search ."&getPrice=". $getPrice ."&orderBy=". $orderBy . $orderWord;
+    $apiRequest = $config['apihost']."methods/get/articulos.php?auth=". $auth ."&search=". $search ."&getPrice=". $getPrice ."&orderBy=". $orderBy . $orderWord;
     $json_string = file_get_contents($apiRequest);
 
     if ($debug){echo $apiRequest;}
@@ -61,7 +62,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     }
 
 //var_dump($data);
-    echo "<link rel=\"stylesheet\" href=\"http://localhost/GsoftWEB/css/tables.css\" type=\"text/css\"><table cellspacing=\"0\">
+    echo "<link rel=\"stylesheet\" href=\"".$config['webhost']."/css/tables.css\" type=\"text/css\"><table cellspacing=\"0\">
            <tr class='banner'>
                 <td><strong>Código</strong></td>
                 <td><strong>Nombre</strong></td>
