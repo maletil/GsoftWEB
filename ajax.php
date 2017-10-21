@@ -12,11 +12,7 @@ if (isset($_GET["auth"])){
 if (isset($_GET["mode"])){
     $mode = $_GET["mode"];
 }
-if ($mode == 1){
-    $url = "http://localhost/GsoftWEB/tables/clientes.php?auth=". $auth ."&search=";
-}else {
-    $url = "http://localhost/GsoftWEB/tables/articulos.php?auth=". $auth ."&search=";
-}
+    $config = include ('private/config.php');
 ?>
 
 <html>
@@ -59,7 +55,7 @@ if ($mode == 1){
             console.log(order);
             console.log(search);
             console.log(price);
-            var petition = "<?php echo $url;?>"+ search + "&orderBy=" + order + "&getPrice=" + price;
+            var petition = "<?php echo $config['webhost']?>tables/articulos.php" + "?search=" + search + "&orderBy=" + order + "&getPrice=" + price + "&auth=<?php echo $auth;?>" ;
             xmlhttp.open("GET",petition,true);
             xmlhttp.send();
             console.log(xmlhttp);
