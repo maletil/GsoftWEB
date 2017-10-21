@@ -17,6 +17,15 @@ if (isset($_GET["auth"])){
         var price = true;
         var order = "Nombre";
         var search = "";
+        //Config
+        let debug = false;
+
+        if (window.XMLHttpRequest) {
+            // IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        } else {  // IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
 
         function priceBox() {
             price = getPrice.checked;
@@ -27,34 +36,31 @@ if (isset($_GET["auth"])){
             makerequest();
         }
         function showResult(str) {
-            if (str.length === 0 || str.length === 1) {
-                document.getElementById("livesearch").innerHTML="";
-                document.getElementById("livesearch").style.border="0px";
-                return;
+            if (str !== "*"){
+                if (str.length === 0 || str.length === 1) {
+                    document.getElementById("livesearch").innerHTML = "";
+                    document.getElementById("livesearch").style.border = "0px";
+                    return;
+                }
             }
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            } else {  // code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            search = str;
+        makerequest();
+        }
+        function makerequest() {
+            if (debug){
+                console.log(order);
+                console.log(search);
+                console.log(price);
             }
             xmlhttp.onreadystatechange=function() {
                 if (this.readyState === 4 && this.status === 200) {
                     document.getElementById("livesearch").innerHTML = this.responseText;
                 }
             };
-            console.log(search + " de verda");
-            search = str;
-            makerequest();
-        }
-        function makerequest() {
-            console.log(order);
-            console.log(search);
-            console.log(price);
             var petition = "<?php echo $config['webhost']?>tables/articulos.php" + "?search=" + search + "&orderBy=" + order + "&getPrice=" + price + "&auth=<?php echo $auth;?>";
             xmlhttp.open("GET",petition,true);
             xmlhttp.send();
-            console.log(xmlhttp);
+            if (debug) {console.log(xmlhttp);}
         }
 </script>
 </head>
