@@ -12,6 +12,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     $search = rawurlencode($_GET["search"]);
     $auth = $_GET["auth"];
     $getPrice = "false";
+    $debug = false;
 
 
     function phoneNumber($number) {
@@ -59,7 +60,7 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
             </tr>
 
         <?php endforeach;
-        echo "</table>". $contador ." resultados.";
+        if ($debug) {echo "</table>". $contador ." resultados.";}
     } else {echo "</table>"; echo ('No encontrado');}
 }
 ?>

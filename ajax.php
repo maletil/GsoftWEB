@@ -8,10 +8,6 @@
 
 if (isset($_GET["auth"])){
     $auth = $_GET["auth"];
-    $mode = 0;
-if (isset($_GET["mode"])){
-    $mode = $_GET["mode"];
-}
     $config = include ('private/config.php');
 ?>
 
@@ -22,8 +18,7 @@ if (isset($_GET["mode"])){
         var order = "Nombre";
         var search = "";
 
-        function priceBox(str) {
-
+        function priceBox() {
             price = getPrice.checked;
             makerequest();
         }
@@ -45,9 +40,10 @@ if (isset($_GET["mode"])){
             }
             xmlhttp.onreadystatechange=function() {
                 if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById("livesearch").innerHTML=this.responseText;
+                    document.getElementById("livesearch").innerHTML = this.responseText;
                 }
             };
+            console.log(search + " de verda");
             search = str;
             makerequest();
         }
@@ -55,7 +51,7 @@ if (isset($_GET["mode"])){
             console.log(order);
             console.log(search);
             console.log(price);
-            var petition = "<?php echo $config['webhost']?>tables/articulos.php" + "?search=" + search + "&orderBy=" + order + "&getPrice=" + price + "&auth=<?php echo $auth;?>" ;
+            var petition = "<?php echo $config['webhost']?>tables/articulos.php" + "?search=" + search + "&orderBy=" + order + "&getPrice=" + price + "&auth=<?php echo $auth;?>";
             xmlhttp.open("GET",petition,true);
             xmlhttp.send();
             console.log(xmlhttp);

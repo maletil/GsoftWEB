@@ -20,6 +20,8 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
     $roundPrecision = 3;
     $debug = false;
 
+    $rowCount = 0;
+
     if (isset($_GET["getPrice"])) {
         $getPrice = $_GET["getPrice"];
         if ($_GET["getPrice"] == "true"){
@@ -83,12 +85,15 @@ if (isset($_GET["auth"]) && isset($_GET["search"])) {
                 <td><strong><?php echo substr($object->{'Codigo'}, 0, 2) ?></strong></td>
                 <?php if ($showPrices){returnPrice($object->{'Precio Medio'});}
                 if ($showPrices) {returnPrice($object->{'Ultimo Precio'});} ?>
-                <td><strong><?php echo substr($object->{'Ultima Modificacion'}, 0, 10) ?></strong></td>
+                <td><strong><?php echo substr($object->{'Ultima Modificacion'}, 0, 10); $rowCount++;?></strong></td>
             </tr>
 
         <?php endforeach;
         echo "</table>";
     } else {echo "</table>"; echo ('No encontrado');
+    }
+    if ($debug){
+        echo $rowCount;
     }
 }
 ?>
